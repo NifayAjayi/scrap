@@ -9,13 +9,15 @@
         
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f0db4f;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('https://wallpapers.com/images/high/cute-minion-faces-vejheqrt9whypgzf.webp');
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ffd300" stroke-width="5"/><circle cx="35" cy="40" r="5" fill="%23333"/><circle cx="65" cy="40" r="5" fill="%23333"/><path d="M 30 60 Q 50 70 70 60" fill="none" stroke="%23333" stroke-width="3"/></svg>');
         }
         .container {
             background-color: rgba(255, 255, 255, 0.9);
@@ -37,38 +39,87 @@
             font-size: 1.2em;
             line-height: 1.6;
         }
-        .minion {
-            font-size: 60px;
-            margin: 20px 0;
-        }
         .name {
             font-family: 'Fredoka One', cursive;
             color: #0077be;
             font-size: 1.5em;
         }
-        .banana {
-            font-size: 30px;
-            margin: 10px 0;
-            animation: swing 2s infinite;
-            display: inline-block;
+        .slideshow {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
         }
-        @keyframes swing {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .emoji {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        .nav-button {
+            background-color: #ffd300;
+            border: none;
+            color: #4a4a4a;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Fredoka One', cursive;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>I'm Sorry, <span class="name">Selina</span></h1>
-        <p>My adorable Selina, I made a mistake and I truly regret it.</p>
-        <p>You're as special to me as Minions are to Gru!</p>
-        <div class="minion">🤓</div>
-        <p>Can we talk? I promise to listen and understand.</p>
-        <div class="banana">🍌</div>
-        <p>I'd go bananas for another chance!</p>
+        <div class="slideshow">
+            <div class="slide active">
+                <div class="emoji">🤓</div>
+                <p>My adorable Selina, I made a mistake and I truly regret it.</p>
+            </div>
+            <div class="slide">
+                <div class="emoji">🍌</div>
+                <p>You're as special to me as bananas are to Minions!</p>
+            </div>
+            <div class="slide">
+                <div class="emoji">🎭</div>
+                <p>Can we talk? I promise to listen and understand.</p>
+            </div>
+            <div class="slide">
+                <div class="emoji">💛</div>
+                <p>I'd go bananas for another chance!</p>
+            </div>
+        </div>
+        <button class="nav-button" onclick="nextSlide()">Next</button>
         <p>With all my Minion-like enthusiasm and love,</p>
         <p>[Your Name]</p>
     </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+    </script>
 </body>
 </html>
